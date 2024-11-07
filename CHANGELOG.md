@@ -28,7 +28,7 @@ Full documentation for RCCL is available at [https://rccl.readthedocs.io](https:
 
 * Fixed model matching with PXN enable
 
-### Known Issues
+### Known issues
 
 * MSCCL is temporarily disabled for AllGather collectives.
   - This can impact in-place messages (< 2 MB) with ~2x latency.
