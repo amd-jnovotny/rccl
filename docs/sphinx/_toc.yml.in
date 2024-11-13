@@ -13,6 +13,7 @@ subtrees:
 - caption: How to 
   entries:
   - file: how-to/using-nccl
+  - file: how-to/debugging-guide
 
 - caption: API reference 
   entries:

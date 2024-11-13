@@ -28,6 +28,7 @@ The RCCL public repository is located at `<https://github.com/ROCm/rccl>`_.
   .. grid-item-card:: How to
 
     * :ref:`using-nccl`
+    * :doc:`how-to/debugging-guide`
        
   .. grid-item-card:: API reference
 
