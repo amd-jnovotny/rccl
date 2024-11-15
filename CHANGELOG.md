@@ -34,6 +34,8 @@ Full documentation for RCCL is available at [https://rccl.readthedocs.io](https:
   - This can impact in-place messages (< 2 MB) with ~2x latency.
   - Older RCCL versions are not impacted.
   - This issue will be addressed in a future ROCm release.
+* Unit tests do not exit gracefully when running on a single GPU.
+  - This issue will be addressed in a future ROCm release.
 
 ## RCCL 2.20.5 for ROCm 6.2.1
 ### Fixed
