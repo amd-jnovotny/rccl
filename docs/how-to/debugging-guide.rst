@@ -101,23 +101,8 @@ Collect the following information about the RCCL installation and configuration.
 
       export NCCL_DEBUG=VERSION
 
-   To run rccl-tests, use these commands:
-
-   .. code:: shell
-
-      chmod +x run_rccl-tests.sh
-      ./run_rccl-tests.sh
-
-   The results are displayed using the following format:
-
-   .. code:: shell
-
-      RCCL version 2.20.5+hip6.2 develop:eb562e7
-
-   .. note::
-   
-      For more information on how to build and run rccl-tests, see the
-      `rccl-tests GitHub <https://github.com/ROCm/rccl-tests/blob/develop/README.md>`_.
+*  Run rccl-tests and collect the results. For information on how to build and run rccl-tests, see the
+   `rccl-tests GitHub <https://github.com/ROCm/rccl-tests/blob/develop/README.md>`_.
 
 *  Collect the RCCL logging information. Enable the debug logs, 
    then run rccl-tests or any e2e workload to collect the logs. Use the 
@@ -126,6 +111,58 @@ Collect the following information about the RCCL installation and configuration.
    .. code:: shell
 
       export NCCL_DEBUG=INFO
+
+.. _use-rccl-replayer:
+
+Using the RCCL Replayer
+------------------------
+
+The RCCL Replayer is a debugging tool designed to analyze and replay the collective logs obtained from RCCL runs. 
+It can be useful when trying to reproduce problems, because it uses dummy data and doesn't have any dependencies 
+on non-RCCL calls. For more background on the RCCL Replayer, 
+see `the RCCL Replayer GitHub documentation <https://github.com/ROCm/rccl/tree/develop/tools/rccl_replayer>`_.
+
+You must build the RCCL Replayer before you can use it. To build it, run these commands. Ensure ``MPI_DIR`` is set to 
+the path where MPI is installed.
+
+.. code:: shell
+
+   cd rccl/tools/rccl_replayer
+   MPI_DIR=/path/to/mpi make
+
+To use the RCCL Replayer, follow these steps: 
+
+#. Collect the per-rank logs from the RCCL run by adding the following environment variables.
+   This prevents any race conditions that might cause ranks to interupt the output from other ranks.
+
+   .. code:: shell
+
+      NCCL_DEBUG=INFO NCCL_DEBUG_SUBSYS=COLL NCCL_DEBUG_FILE=some_name_here.%h.%p.log
+
+#. Combine all the logs into a single file. This will become the input to the replayer.
+
+   .. code:: shell
+
+      cat some_name_here_*.log > some_name_here.log
+
+#. Run the RCCL Replayer using the following command. Replace ``<numProcesses>`` with the number of MPI processes to 
+   run, ``</path/to/logfile>`` with the path to the collective log file generated during 
+   the RCCL runs, and ``<numGpusPerMpiRank>`` with the number of GPUs per MPI rank used in the application.
+
+   .. code:: shell
+
+      mpirun -np <numProcesses> ./rcclReplayer </path/to/logfile> <numGpusPerMpiRank>
+
+   In a multi-node application environment, you can replay the collective logs on multiple nodes
+   using the following command:
+
+   .. code:: shell
+
+      mpirun --hostfile <path/to/hostfile.txt> -np <numProcesses> ./rcclReplayer </path/to/logfile> <numGpusPerMpiRank>
+
+   .. note::
+
+      Depending on the MPI library you are using, you might need to modify the ``mpirun`` command.
 
 Troubleshooting
 =============================
@@ -195,19 +232,10 @@ To use the RCCL tests to collect the RCCL benchmark data, follow these steps:
 
       cat /proc/sys/kernel/numa_balancing
 
-#. Build MPI, RCCL, and rccl-tests.
+#. Build MPI, RCCL, and rccl-tests. To download and install MPI, see the `MPI site <https://www.mpich.org/>`_.
+   To learn how to build and run rccl-tests, see the `rccl-tests GitHub <https://github.com/ROCm/rccl-tests/blob/develop/README.md>`_.
 
-   .. code:: shell
-
-      chmod +x build_mpich_rccl_rccl-tests.sh
-      ./build_mpich_rccl_rccl-tests.sh
-
-#. Run rccl-tests with MPI using the following script and collect the performance numbers.
-
-   .. code:: shell
-
-      chmod +x run_rccl-tests.sh
-      ./run_rccl-tests.sh
+#. Run rccl-tests with MPI and collect the performance numbers.
 
 RCCL and NCCL comparisons
 =============================
