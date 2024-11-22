@@ -50,12 +50,13 @@ information to the support team.
 
       rocminfo
 
-*  Run the ``rocm-smi`` command to display the system topology.
+*  Run these ``rocm-smi`` commands to display the system topology.
 
    .. code:: shell
 
       rocm-smi
       rocm-smi --showtopo
+      rocm-smi --showdriverversion
 
 *  Determine the values of the ``PATH`` and ``LD_LIBRARY_PATH`` environment variables.
 
@@ -70,13 +71,15 @@ information to the support team.
 
       /opt/rocm/bin/hipconfig --full
 
-*  Verify the network settings and setup using the ``ibv_devinfo`` command. 
-   This command displays information about the available RDMA devices and determines 
-   whether they are installed and functioning properly.
+*  Verify the network settings and setup. Use the ``ibv_devinfo`` command 
+   to display information about the available RDMA devices and determine 
+   whether they are installed and functioning properly. Run ``rdma link``
+   to print a summary of the network links.
 
    .. code:: shell
 
       ibv_devinfo
+      rdma link
 
 *  Determine the BKC version, if this information is known.
 
@@ -232,7 +235,8 @@ To use the RCCL tests to collect the RCCL benchmark data, follow these steps:
 
       cat /proc/sys/kernel/numa_balancing
 
-#. Build MPI, RCCL, and rccl-tests. To download and install MPI, see the `MPI site <https://www.mpich.org/>`_.
+#. Build MPI, RCCL, and rccl-tests. To download and install MPI, see either 
+   `OpenMPI <https://www.open-mpi.org/software/ompi/v5.0/>`_ or `MPICH <https://www.mpich.org/>`_.
    To learn how to build and run rccl-tests, see the `rccl-tests GitHub <https://github.com/ROCm/rccl-tests/blob/develop/README.md>`_.
 
 #. Run rccl-tests with MPI and collect the performance numbers.
