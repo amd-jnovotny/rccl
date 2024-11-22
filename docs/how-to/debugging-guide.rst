@@ -179,7 +179,7 @@ Use the following troubleshooting techniques to attempt to isolate the issue.
 Analyzing performance issues
 =============================
 
-If the issues involve performance issues and occur in an e2e workload, try the following 
+If the issues involve performance issues in an e2e workload, try the following 
 microbenchmarks and collect the results. Follow the instructions in the subsequent sections
 to run these benchmarks and provide the results to the support team.
 
