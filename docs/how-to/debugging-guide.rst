@@ -171,8 +171,8 @@ Use the following troubleshooting techniques to attempt to isolate the issue.
 
 *  Build or run the develop branch version of RCCL and see if the problem persists.
 *  Try an earlier RCCL version (minor or major).
-*  If you recently made changes to the ROCm runtime configuration, KFD/driver or compiler,
-   run the test again with the previous configuration.
+*  If you recently changed the ROCm runtime configuration, KFD/driver, or compiler,
+   rerun the test with the previous configuration.
 
 .. _analyze-performance-info:
 
