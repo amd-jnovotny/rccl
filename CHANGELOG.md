@@ -2,6 +2,18 @@
 
 Full documentation for RCCL is available at [https://rccl.readthedocs.io](https://rccl.readthedocs.io)
 
+## RCCL 2.21.5 for ROCm 6.3.1
+
+### Added
+
+### Changed
+
+* Enhanced user documentation
+
+### Resolved issues
+
+* Corrected user help strings in `install.sh`
+
 ## RCCL 2.21.5 for ROCm 6.3.0
 
 ### Added
