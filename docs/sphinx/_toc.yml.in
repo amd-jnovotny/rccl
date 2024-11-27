@@ -18,6 +18,7 @@ subtrees:
   entries:
   - file: how-to/using-nccl
     title: Using the NCCL Net plugin
+  - file: how-to/debugging-guide
   - file: how-to/rccl-usage-tips
 
 - caption: Examples
