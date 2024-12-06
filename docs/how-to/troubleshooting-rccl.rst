@@ -32,7 +32,7 @@ Collect this information about the ROCm version, GPU/accelerator, platform, and 
 
       rocm_agent_enumerator
 
-   Also collect the name of the GPU or accelerator:
+   Also, collect the name of the GPU or accelerator:
 
    .. code:: shell
 
@@ -73,7 +73,7 @@ Isolating the issue
 -------------------
 
 The problem might be a general issue or specific to the architecture or system.
-To narrow down the issue, collect information about the GPU or accelerator, along with other
+To narrow down the issue, collect information about the GPU or accelerator and other
 details about the platform and system. Some issues to consider include:
 
 *  Is ROCm running on:
@@ -131,8 +131,8 @@ Using the RCCL Replayer
 ------------------------
 
 The RCCL Replayer is a debugging tool designed to analyze and replay the collective logs obtained from RCCL runs. 
-It can be useful when trying to reproduce problems, because it uses dummy data and doesn't have any dependencies 
-on non-RCCL calls. For more background, 
+It can be helpful when trying to reproduce problems, because it uses dummy data and doesn't have any dependencies 
+on non-RCCL calls. For more information, 
 see `RCCL Replayer GitHub documentation <https://github.com/ROCm/rccl/tree/develop/tools/rccl_replayer>`_.
 
 You must build the RCCL Replayer before you can use it. To build it, run these commands. Ensure ``MPI_DIR`` is set to 
@@ -175,7 +175,7 @@ To use the RCCL Replayer, follow these steps:
 
    .. note::
 
-      Depending on the MPI library you are using, you might need to modify the ``mpirun`` command.
+      Depending on the MPI library you're using, you might need to modify the ``mpirun`` command.
 
 .. _analyze-performance-info:
 
@@ -195,7 +195,7 @@ Collect the TransferBench data
 
 TransferBench allows you to benchmark simultaneous copies between
 user-specified devices. For more information, 
-see :doc:`the TransferBench documentation <transferbench:index>`.
+see the :doc:`TransferBench documentation <transferbench:index>`.
 
 To collect the TransferBench data, follow these steps:
 
@@ -245,5 +245,5 @@ RCCL and NCCL comparisons
 =============================
 
 If you are also using NVIDIA hardware or NCCL and notice a performance gap between the two systems,
-collect the system and performance data on the NVIDIA platform as well. 
+collect the system and performance data on the NVIDIA platform. 
 Provide both sets of data to the support team.
