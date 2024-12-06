@@ -1,24 +1,23 @@
 .. meta::
-   :description: A guide to debugging the RCCL library of multi-GPU and multi-node collective communication primitives optimized for AMD GPUs
+   :description: A guide to troubleshooting the RCCL library of multi-GPU and multi-node collective communication primitives optimized for AMD GPUs
    :keywords: RCCL, ROCm, library, API, debug
 
-.. _debugging-rccl:
+.. _troubleshooting-rccl:
 
 *********************
-RCCL debugging
+Troubleshooting RCCL
 *********************
 
-This topic explains the steps to triage and debug functional and performance issues with RCCL.
-While debugging, collect the output from the commands in this guide for
-support or field personnel. To debug RCCL, follow these steps.
+This topic explains the steps to troubleshoot functional and performance issues with RCCL.
+While debugging, collect the output from the commands in this guide. This data
+can be used as supporting information when submitting an issue report to AMD.
 
 .. _debugging-system-info:
 
 Collecting system information
 =============================
 
-Collect information about the ROCm version, GPU/accelerator, platform, and configuration and provide this
-information to the support team.
+Collect this information about the ROCm version, GPU/accelerator, platform, and configuration.
 
 *  Verify the ROCm version. This might be a release version or a
    mainline or staging version. Use this command to display the version:
@@ -27,17 +26,6 @@ information to the support team.
 
       cat /opt/rocm/.info/version
 
-*  The problem might be a general issue or specific to the architecture or system.
-   To narrow down the issue, collect information about the GPU or accelerator, along with other
-   details about the platform and system. Some issues to consider include:
-
-   *  Is ROCm running on a bare-metal setup, in a Docker container, in an SR-IOV virtualized
-      environment, or some combination of these configurations? If ROCm is running in a Docker
-      container, provide the name of the Docker image.
-   *  Is the problem only seen on a specific GPU architecture?
-   *  Is it only seen on a specific system type?
-   *  Is it happening on a single node or multinode setup?
-  
    Run the following command and collect the output:
 
    .. code:: shell
@@ -81,7 +69,29 @@ information to the support team.
       ibv_devinfo
       rdma link
 
-*  Determine the BKC version, if this information is known.
+Isolating the issue
+-------------------
+
+The problem might be a general issue or specific to the architecture or system.
+To narrow down the issue, collect information about the GPU or accelerator, along with other
+details about the platform and system. Some issues to consider include:
+
+*  Is ROCm running on:
+
+   *  A bare-metal setup
+   *  In a Docker container (determine the name of the Docker image)
+   *  In an SR-IOV virtualized
+   *  Some combination of these configurations
+
+*  Is the problem only seen on a specific GPU architecture?
+*  Is it only seen on a specific system type?
+*  Is it happening on a single node or multinode setup?
+*  Use the following troubleshooting techniques to attempt to isolate the issue.
+
+   *  Build or run the develop branch version of RCCL and see if the problem persists.
+   *  Try an earlier RCCL version (minor or major).
+   *  If you recently changed the ROCm runtime configuration, KFD/driver, or compiler,
+      rerun the test with the previous configuration.
 
 .. _collecting-rccl-info:
 
@@ -166,16 +176,6 @@ To use the RCCL Replayer, follow these steps:
    .. note::
 
       Depending on the MPI library you are using, you might need to modify the ``mpirun`` command.
-
-Troubleshooting
-=============================
-
-Use the following troubleshooting techniques to attempt to isolate the issue.
-
-*  Build or run the develop branch version of RCCL and see if the problem persists.
-*  Try an earlier RCCL version (minor or major).
-*  If you recently changed the ROCm runtime configuration, KFD/driver, or compiler,
-   rerun the test with the previous configuration.
 
 .. _analyze-performance-info:
 
